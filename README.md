@@ -1,3 +1,4 @@
+
 # SignBridge
 
 SignBridge es un prototipo de aplicación web que utiliza inteligencia artificial para reconocer gestos manuales basados en el alfabeto dactilológico y mostrar las letras identificadas en tiempo real.
@@ -63,6 +64,8 @@ Traductor-de-Lenguaje-de-Senas/
 │   ├── style.css
 │   └── script.js
 │
+├── Teachable Machine.tm
+│
 ├── Presentacion SignBridge.pptx
 │
 ├── SignBridge.docx
@@ -105,6 +108,15 @@ Durante el entrenamiento se identificaron dificultades relacionadas con la simil
 
 Para mejorar el funcionamiento del prototipo se utilizaron encuadres centrados en la mano y se incorporó una región de reconocimiento ajustable.
 
+**Archivo del proyecto:** `Teachable Machine.tm`
+
+Este archivo contiene una copia del proyecto de entrenamiento de Teachable Machine y permite conservar los datos y la configuración para volver a trabajar con el modelo desde la plataforma.
+
+La aplicación web utiliza el modelo publicado en:
+
+https://teachablemachine.withgoogle.com/models/2otILMuhs/
+
+El archivo `.tm` no es necesario para ejecutar la aplicación, ya que el reconocimiento utiliza el modelo alojado en línea.
 
 ## Estado del proyecto
 
