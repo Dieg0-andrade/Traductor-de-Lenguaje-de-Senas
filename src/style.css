@@ -1,0 +1,398 @@
+
+:root {
+  --background: #f5f3ef;
+  --panel: #faf9f6;
+  --surface: #efede8;
+  --text: #292832;
+  --muted: #85818d;
+  --accent: #7667c9;
+  --accent-dark: #6252b6;
+  --border: #e8e4df;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--text);
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.app {
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 42px 28px 24px;
+}
+
+.header {
+  margin-bottom: 34px;
+}
+
+.logo {
+  display: inline-block;
+  color: var(--accent);
+  font-size: 18px;
+  font-weight: 750;
+  margin-bottom: 22px;
+}
+
+.header h1 {
+  font-size: clamp(28px, 4vw, 42px);
+  letter-spacing: -1.5px;
+  line-height: 1.2;
+  margin: 0 0 12px;
+}
+
+.header p {
+  color: var(--muted);
+  font-size: 16px;
+  margin: 0;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.panel {
+  min-width: 0;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 8px 30px rgba(30, 25, 50, 0.025);
+}
+
+.panel-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.panel-heading h2 {
+  font-size: 19px;
+  margin: 0 0 7px;
+}
+
+.panel-heading p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.status {
+  flex-shrink: 0;
+  background: #eae7e1;
+  color: #77717d;
+  padding: 8px 11px;
+  border-radius: 30px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.status.active {
+  color: #287b54;
+  background: #e2f3e9;
+}
+
+.camera-container {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  overflow: hidden;
+  border-radius: 15px;
+  background: #eae7e1;
+}
+
+#webcam {
+  display: none;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform: scaleX(-1);
+}
+
+.camera-overlay {
+  display: none;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Zona de reconocimiento */
+
+.detection-box {
+  position: absolute;
+  border: 2px solid #a78bfa;
+  border-radius: 14px;
+  background: transparent;
+
+  /* Oscurece únicamente el exterior del recuadro */
+  box-shadow:
+    0 0 0 9999px rgba(25, 25, 35, 0.52),
+    0 0 14px rgba(167, 139, 250, 0.25);
+
+  cursor: grab;
+  pointer-events: auto;
+  touch-action: none;
+  user-select: none;
+  transition: border-color 0.2s;
+}
+
+.detection-box:hover {
+  border-color: #c4b5fd;
+}
+
+.detection-box:active {
+  cursor: grabbing;
+}
+
+.detection-label {
+  display: none;
+}
+
+.drag-icon {
+  display: none;
+}
+
+.camera-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  color: #8c8791;
+}
+
+.camera-icon {
+  font-size: 49px;
+}
+
+.camera-placeholder p {
+  font-size: 14px;
+  margin: 0;
+}
+
+.crop-controls {
+  background: var(--surface);
+  padding: 18px;
+  border-radius: 14px;
+  margin-top: 17px;
+}
+
+.control-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.control-heading strong {
+  color: var(--accent);
+}
+
+#crop-size {
+  width: 100%;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.secondary-button {
+  width: 100%;
+  margin-top: 12px;
+  padding: 11px;
+  border: 1px solid #d9d2e7;
+  background: #faf9f6;
+  color: var(--accent);
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.secondary-button:hover {
+  background: #f0ecfa;
+}
+
+.primary-button {
+  width: 100%;
+  padding: 15px 18px;
+  margin-top: 17px;
+  border: none;
+  border-radius: 12px;
+  background: var(--accent);
+  color: white;
+  font-size: 15px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.primary-button:hover {
+  background: var(--accent-dark);
+}
+
+.primary-button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.preview-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: var(--surface);
+  border-radius: 14px;
+  padding: 18px;
+  margin-top: 17px;
+}
+
+.preview-section > div {
+  flex: 1;
+}
+
+.preview-section h3 {
+  font-size: 14px;
+  margin: 0 0 7px;
+}
+
+.preview-section p {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+#crop-preview {
+  display: none;
+}
+
+.camera-tip {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+  text-align: center;
+  margin: 15px 0 0;
+}
+
+.result-card,
+.confidence-card,
+.translation-card {
+  background: var(--surface);
+  border-radius: 15px;
+  padding: 21px;
+  margin-bottom: 16px;
+}
+
+.result-card {
+  text-align: center;
+  padding: 25px 18px;
+}
+
+.result-label {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.prediction {
+  color: var(--accent);
+  font-size: 76px;
+  font-weight: 750;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+.prediction-status {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+.confidence-heading {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-bottom: 13px;
+}
+
+.confidence-heading span {
+  color: var(--muted);
+}
+
+.confidence-heading strong {
+  color: var(--accent);
+}
+
+.progress-track {
+  height: 9px;
+  background: #dcd7e4;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  width: 0%;
+  height: 100%;
+  background: var(--accent);
+  border-radius: 20px;
+  transition: width 0.2s;
+}
+
+.translated-text {
+  font-size: 17px;
+  font-weight: 600;
+  min-height: 30px;
+  overflow-wrap: anywhere;
+}
+
+.info-note {
+  padding-top: 15px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.footer {
+  margin-top: 35px;
+  color: #a19ba5;
+  text-align: center;
+  font-size: 12px;
+}
+
+@media (max-width: 800px) {
+  .app {
+    padding: 25px 15px;
+  }
+
+  .workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .panel {
+    padding: 19px;
+  }
+
+  .camera-container {
+    height: 300px;
+  }
+}
+
+@media (max-width: 420px) {
+  .preview-section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
