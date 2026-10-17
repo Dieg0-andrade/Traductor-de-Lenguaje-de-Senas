@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SignBridge | Traductor de señas</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    #crop-preview {
+      display: none;
+    }
+
+    #camera-status {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <div class="logo">✦ SignBridge</div>
+      <h1>Traductor de señas en tiempo real</h1>
+      <p>Coloca tu mano dentro del recuadro para reconocer las señas.</p>
+    </header>
+
+    <section class="workspace">
+      <div class="panel camera-panel">
+        <div class="panel-heading">
+          <div>
+            <h2>Cámara en vivo</h2>
+            <p>Arrastra el recuadro para ajustar la zona de reconocimiento.</p>
+          </div>
+          <span id="camera-status" class="status">
+            Cámara apagada
+          </span>
+        </div>
+
+        <div id="webcam-container" class="camera-container">
+          <video id="webcam" autoplay playsinline muted></video>
+
+          <div id="camera-overlay" class="camera-overlay">
+            <div id="detection-box" class="detection-box">
+              <span class="detection-label">Mover recuadro</span>
+              <span class="drag-icon">✥</span>
+            </div>
+          </div>
+
+          <div id="camera-placeholder" class="camera-placeholder">
+            <span class="camera-icon">✋</span>
+            <p>Activa la cámara para comenzar</p>
+          </div>
+        </div>
+
+        <div class="crop-controls">
+          <div class="control-heading">
+            <label for="crop-size">Tamaño del recuadro</label>
+            <strong id="crop-size-value">72%</strong>
+          </div>
+
+          <input
+            id="crop-size"
+            type="range"
+            min="25"
+            max="100"
+            value="72"
+            step="1"
+          >
+
+          <button id="reset-crop" class="secondary-button">
+            Centrar recuadro
+          </button>
+        </div>
+
+        <button id="start-btn" class="primary-button">
+          Activar cámara
+        </button>
+
+        <canvas
+          id="crop-preview"
+          width="224"
+          height="224"
+          hidden
+        ></canvas>
+      </div>
+
+      <div class="panel results-panel">
+        <div class="panel-heading">
+          <div>
+            <h2>Reconocimiento</h2>
+            <p>Resultados del modelo de inteligencia artificial.</p>
+          </div>
+        </div>
+
+        <div class="result-card">
+          <span class="result-label">Seña detectada</span>
+          <div id="prediction" class="prediction">—</div>
+          <span id="prediction-status" class="prediction-status">
+            Esperando cámara
+          </span>
+        </div>
+
+        <div class="confidence-card">
+          <div class="confidence-heading">
+            <span>Confianza del modelo</span>
+            <strong id="confidence">0%</strong>
+          </div>
+
+          <div class="progress-track">
+            <div id="confidence-bar" class="progress-fill"></div>
+          </div>
+        </div>
+
+        <div class="translation-card">
+          <span class="result-label">Resultado actual</span>
+          <div id="translated-text" class="translated-text">
+            Activa la cámara para comenzar.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      SignBridge · Proyecto de Inteligencia Artificial
+    </footer>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
